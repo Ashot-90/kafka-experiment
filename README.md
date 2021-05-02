@@ -1,5 +1,4 @@
 # kafka-experiment
-1-st Step:
-docker build -t myimage .
-2-nd Step:
-docker run -e URL='http://google.com' -e PATTERN='.*google.*' -it myimage
+## To start running site monitoring app
+- docker build -t myimage .
+- docker run -e URL='http://google.com' -e PATTERN='.\*google.\*' -it myimage
