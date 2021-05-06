@@ -8,6 +8,6 @@ RUN tar xzf kafka_2.13-2.8.0.tgz
 WORKDIR kafka_2.13-2.8.0
 COPY producer.py .
 COPY consumer.py .
-COPY run_monitoring.sh .
 ENV TOPIC=mytopic
-CMD ./run_monitoring.sh
+ENV URL=http://google.com
+ENV PATTERN='.*google.*'

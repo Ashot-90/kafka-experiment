@@ -8,13 +8,13 @@ import sys
 
 
 def start_producer():
-    producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
+    producer = KafkaProducer(bootstrap_servers=['kafka:9092'])
     try:
         url = os.environ['URL']
         regexp = os.environ['PATTERN']
         topic = os.environ['TOPIC']
     except KeyError:
-        print("Error: Environment variable has not found", end='', file=sys.stderr)
+        print("Error: Environment variable has not found", file=sys.stderr)
         sys.exit(1)
     while True:
         response = requests.get(url)

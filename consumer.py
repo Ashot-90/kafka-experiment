@@ -8,11 +8,11 @@ def start_consumer():
     try:
         topic = os.environ['TOPIC']
     except KeyError:
-        print("Error: Environment variable has not found", end='', file=sys.stderr)
+        print("Error: Environment variable has not found\n", file=sys.stderr)
         sys.exit(1)
     consumer = KafkaConsumer(
         topic,
-        bootstrap_servers=['localhost:9092'],
+        bootstrap_servers=['kafka:9092'],
         auto_offset_reset='earliest',
         enable_auto_commit=True,
         group_id='my-group',
