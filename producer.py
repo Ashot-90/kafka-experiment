@@ -27,7 +27,8 @@ def start_producer():
         data['regexp_found'] = x is not None
         message = json.dumps(data)
         producer.send(topic, value=message.encode())
-        time.sleep(1)
+        producer.flush()
+        time.sleep(5)
 
 
 if __name__ == '__main__':

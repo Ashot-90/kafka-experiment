@@ -17,10 +17,6 @@ services:
       bin/kafka-server-start.sh config/server.properties;"
   producer:
     image: myimage
-    environment:
-      - URL=http://google.com
-      - PATTERN='.*google.*'
-      - TOPIC=mytopic
     command: >
       /bin/bash -c "
       while ! nc -z kafka 9092;
@@ -28,14 +24,10 @@ services:
         echo Waiting for 9092 port to be accessible;
         sleep 5;
       done;
-      bin/kafka-topics.sh --create --topic ${TOPIC} --bootstrap-server kafka:9092;
+      bin/kafka-topics.sh --create --topic mytopic --bootstrap-server kafka:9092;
       python3 producer.py;"
   consumer:
     image: myimage
-    environment:
-      - URL=http://google.com
-      - PATTERN='.*google.*'
-      - TOPIC=mytopic
     command: >
       /bin/bash -c "
       while ! nc -z kafka 9092;
@@ -44,3 +36,10 @@ services:
         sleep 5;
       done;
       python3 consumer.py;"
+  db:
+    image: postgres:latest
+    hostname: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
